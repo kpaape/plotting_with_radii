@@ -46,6 +46,19 @@ function drawRadii(origX, origY, dotX, dotY, xStep, yStep) {
     var findTangent1 = 90 - (Math.acos((dotX - origX) / connectLen) * (180 / Math.PI));
     var findTangent2 = (Math.acos((dotX - origX) / connectLen) * (180 / Math.PI)) - 90;
     // console.log({findTangent1, findTangent2});
+    var armAngle1 = 0;
+    if(dotY > 50) {
+        armAngle1 = 180 - angle - findTangent1;
+    } else {
+        armAngle1 = findTangent1 - angle;
+    }
+    if(isNaN(armAngle1)) {
+        armAngle1 = 0;
+    } else {
+        if(armAngle1 < 0) {
+            armAngle1 += 360;
+        }
+    }
 
 
 
@@ -59,18 +72,28 @@ function drawRadii(origX, origY, dotX, dotY, xStep, yStep) {
     }
     line.setAttribute("style", `stroke:${armColor};stroke-width:4`);
     maxRadius.setAttribute("r", `${pythagC*2}%`);
+
+
+    // find the end point of the first arm
+    // x = r * cos(armAngle1)
+    // y = r * sin(armAngle1)
+    var armJoin = document.getElementById("armJoin");
+    var secondArmX = Math.cos(armAngle1 / (180 / Math.PI)) * pythagC;
+    var secondArmY = Math.sin(armAngle1 / (180 / Math.PI)) * pythagC;
+    secondArmX += 50;
+    secondArmY += 50;
+    // added 50 to each since the location is based on percents and the origin is at 50 50
+    
+    
+
     if(!isNaN(angle)) {
         radius1.setAttribute("x1", `${origX}%`);
         radius1.setAttribute("y1", `${origY}%`);
         radius1.setAttribute("x2", `${(Number(origX) + Number(pythagC))}%`);
         radius1.setAttribute("y2", `${origY}%`);
-        if(dotY > 50) {
-            radius1.setAttribute("transform", `rotate(${180 - angle - findTangent1} 400,400)`);
-            // console.log(angle - findTangent1);
-        } else {
-            radius1.setAttribute("transform", `rotate(${findTangent1 - angle} 400,400)`);
-            // console.log(findTangent1 - angle);
-        }
+        radius1.setAttribute("transform", `rotate(${armAngle1} 400,400)`);
+        armJoin.setAttribute("cx", `${secondArmX}%`);
+        armJoin.setAttribute("cy", `${secondArmY}%`);
         // console.log(radius1);
         // radius2.setAttribute("x1", `${dotX}%`);
         // radius2.setAttribute("y1", `${dotY}%`);
@@ -84,6 +107,8 @@ function drawRadii(origX, origY, dotX, dotY, xStep, yStep) {
         radius1.setAttribute("y1", `0%`);
         radius1.setAttribute("x2", `0%`);
         radius1.setAttribute("y2", `0%`);
+        armJoin.setAttribute("cx", `-50`);
+        armJoin.setAttribute("cy", `-50`);
     }
 }
 
@@ -141,6 +166,7 @@ function procGraphData() {
     graphHTML += `<circle id='maxRadius' cx='50%' cy='50%' r='0' stroke='red' stroke-width='3' fill='none'/>`;
     graphHTML += `<circle id='indexDot' cx='50%' cy='50%' r='10' stroke='black' stroke-width='3' fill='rgba(0, 255, 0, 1)'/>`;
     graphHTML += `<circle id='myDot' cx='${dotX}%' cy='${dotY}%' r='10' stroke='black' stroke-width='3' fill='rgba(255, 0, 0, 1)'/>`;
+    graphHTML += `<circle id='armJoin' cx='-50' cy='$-50' r='10' stroke='black' stroke-width='0' fill='rgba(0, 0, 255, 0.5)'/>`;
     graphHTML += `<line id='connectDots' x1="50%" y1="50%" x2="${dotX}%" y2="${dotY}%" style="stroke:${connectorColor};stroke-width:4"/>`;
     graphHTML += `<line id='radius1' x1="50%" y1="50%" x2="50%" y2="50%" style="stroke:${armColor};stroke-width:4"/>`;
     graphHTML += `<line id='radius2' x1="50%" y1="50%" x2="50%" y2="50%" style="stroke:${armColor};stroke-width:4"/>`;
