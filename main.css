@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --margins: 40px;
+    --graph-dimensions: 800px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    width: calc(var(--graph-dimensions) + var(--margins));
+    margin: 0 auto;
+}
+
+.graph-container {
+    position: relative;
+    display: inline-block;
+    width: calc(var(--graph-dimensions) + var(--margins));
+    height: calc(var(--graph-dimensions) + var(--margins));
+}
+
+.graph {
+    /* border: 1px solid black; */
+    display: inline-block;
+    width: var(--graph-dimensions);
+    height: var(--graph-dimensions);
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.graph-y_labels {
+    display: inline-block;
+    width: var(--margins);
+    height: calc(100% - var(--margins));
+}
+
+.graph-x_labels {
+    display: inline-block;
+    width: 100%;
+    height: var(--margins);
+}
+
+.graph-text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    stroke-width: 0;
+}
+
+
+.graph-no-fill {
+    fill: none;
+}

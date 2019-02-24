@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+</head>
+<body>
+    
+    <div id="container">
+        <h1>Connect Two Points Using 2 Equal Length Radii: Proof of Concept</h1>
+        
+        <div class="graph-container" id="myGraph">{"xLabel": "X", "yLabel": "Y", "y-range": ["0", "40", "1"], "x-range": ["0", "40", "1"]}</div>
+        <label for="xLoc">X Loc</label>
+        <input id="xLoc" name="xLoc" type="range" min="0" max="40" step="0.5">
+        <label for="yLoc">Y Loc</label>
+        <input id="yLoc" name="yLoc" type="range" min="0" max="40" step="0.5">
+        <label for="radii">Radii Length</label>
+        <input id="radii" name="radii" type="range" min="10" max="40" step="1">
+        
+    </div>
+
+    <script src="loc_radii.js"></script>
+</body>
+</html>
