@@ -7,6 +7,36 @@ document.getElementById("yLoc").addEventListener("change", moveDot);
 document.getElementById("radii").addEventListener("change", moveDot);
 procGraphData();
 
+document.addEventListener("keydown", function(event) {
+    var xLoc = document.getElementById("xLoc");
+    var yLoc = document.getElementById("yLoc");
+    console.log(event.keyCode);
+    if(event.keyCode == 65) {
+        if(Number(xLoc.value) > Number(xLoc.min)) {
+            xLoc.value = Number(xLoc.value) - 0.5;
+            moveDot();
+        }
+    }
+    if(event.keyCode == 87) {
+        if(Number(yLoc.value) < Number(yLoc.max)) {
+            yLoc.value = Number(yLoc.value) + 0.5;
+            moveDot();
+        }
+    }
+    if(event.keyCode == 83) {
+        if(Number(yLoc.value) > Number(yLoc.min)) {
+            yLoc.value = Number(yLoc.value) - 0.5;
+            moveDot();
+        }
+    }
+    if(event.keyCode == 68) {
+        if(Number(xLoc.value) < Number(xLoc.max)) {
+            xLoc.value = Number(xLoc.value) + 0.5;
+            moveDot();
+        }
+    }
+})
+
 function moveDot() {
     var myDot = document.getElementById("myDot");
     // console.table({myDot});
