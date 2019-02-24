@@ -65,7 +65,7 @@ function drawRadii(origX, origY, dotX, dotY, xStep, yStep) {
         radius1.setAttribute("x2", `${(Number(origX) + Number(pythagC))}%`);
         radius1.setAttribute("y2", `${origY}%`);
         if(dotY > 50) {
-            radius1.setAttribute("transform", `rotate(${angle - findTangent1} 400,400)`);
+            radius1.setAttribute("transform", `rotate(${180 - angle - findTangent1} 400,400)`);
             // console.log(angle - findTangent1);
         } else {
             radius1.setAttribute("transform", `rotate(${findTangent1 - angle} 400,400)`);
