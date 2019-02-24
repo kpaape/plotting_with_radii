@@ -1,5 +1,5 @@
 var graphColors = ["red", "blue", "green", "orange", "purple"];
-var connectorColor = "rgba(0,150,0,0.5)";
+var connectorColor = "rgba(0,150,0,1)";
 var armColor = "rgba(0,0,255,0.5)";
 
 document.getElementById("xLoc").addEventListener("change", moveDot);
@@ -66,9 +66,9 @@ function drawRadii(origX, origY, dotX, dotY, xStep, yStep) {
     var radius1 = document.getElementById("radius1");
     var radius2 = document.getElementById("radius2");
     if(connectLen > pythagC*2) {
-        armColor = "rgba(255,0,0,0.5)";
+        armColor = "rgba(255,0,0,1)";
     } else {
-        armColor = "rgba(0,255,0,0.5)";
+        armColor = "rgba(0,255,0,1)";
     }
     line.setAttribute("style", `stroke:${armColor};stroke-width:4`);
     maxRadius.setAttribute("r", `${pythagC*2}%`);
@@ -95,10 +95,10 @@ function drawRadii(origX, origY, dotX, dotY, xStep, yStep) {
         armJoin.setAttribute("cx", `${secondArmX}%`);
         armJoin.setAttribute("cy", `${secondArmY}%`);
         // console.log(radius1);
-        // radius2.setAttribute("x1", `${dotX}%`);
-        // radius2.setAttribute("y1", `${dotY}%`);
-        // radius2.setAttribute("x2", `${(Number(dotX) + Number(pythagC))}%`);
-        // radius2.setAttribute("y2", `${dotY}%`);
+        radius2.setAttribute("x1", `${secondArmX}%`);
+        radius2.setAttribute("y1", `${secondArmY}%`);
+        radius2.setAttribute("x2", `${dotX}%`);
+        radius2.setAttribute("y2", `${dotY}%`);
         // console.log(radius2);
         // radius2.setAttribute("transform", `rotate(${angle} ${Number(dotX)*xStep},${Number(dotY)*yStep})`);
         // console.log(radius2);
@@ -107,6 +107,12 @@ function drawRadii(origX, origY, dotX, dotY, xStep, yStep) {
         radius1.setAttribute("y1", `0%`);
         radius1.setAttribute("x2", `0%`);
         radius1.setAttribute("y2", `0%`);
+
+        radius2.setAttribute("x1", `0%`);
+        radius2.setAttribute("y1", `0%`);
+        radius2.setAttribute("x2", `0%`);
+        radius2.setAttribute("y2", `0%`);
+
         armJoin.setAttribute("cx", `-50`);
         armJoin.setAttribute("cy", `-50`);
     }
@@ -166,7 +172,7 @@ function procGraphData() {
     graphHTML += `<circle id='maxRadius' cx='50%' cy='50%' r='0' stroke='red' stroke-width='3' fill='none'/>`;
     graphHTML += `<circle id='indexDot' cx='50%' cy='50%' r='10' stroke='black' stroke-width='3' fill='rgba(0, 255, 0, 1)'/>`;
     graphHTML += `<circle id='myDot' cx='${dotX}%' cy='${dotY}%' r='10' stroke='black' stroke-width='3' fill='rgba(255, 0, 0, 1)'/>`;
-    graphHTML += `<circle id='armJoin' cx='-50' cy='$-50' r='10' stroke='black' stroke-width='0' fill='rgba(0, 0, 255, 0.5)'/>`;
+    graphHTML += `<circle id='armJoin' cx='-50' cy='-50' r='10' stroke='black' stroke-width='0' fill='rgba(0, 0, 255, 0.5)'/>`;
     graphHTML += `<line id='connectDots' x1="50%" y1="50%" x2="${dotX}%" y2="${dotY}%" style="stroke:${connectorColor};stroke-width:4"/>`;
     graphHTML += `<line id='radius1' x1="50%" y1="50%" x2="50%" y2="50%" style="stroke:${armColor};stroke-width:4"/>`;
     graphHTML += `<line id='radius2' x1="50%" y1="50%" x2="50%" y2="50%" style="stroke:${armColor};stroke-width:4"/>`;
